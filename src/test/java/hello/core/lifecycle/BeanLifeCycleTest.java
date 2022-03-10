@@ -16,8 +16,9 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig{
-        @Bean
-        public NetworkClient networkClient(){
+
+        @Bean(initMethod = "init", destroyMethod = "close") //종료 디폴트가 (infered)인데 이추론기능은 close나 shutdown을 찾아서 해줌줌
+       public NetworkClient networkClient(){
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");
             return networkClient;
